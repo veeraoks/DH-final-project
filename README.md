@@ -11,7 +11,7 @@ Data
 
 As mentioned, the data used in this project is the dialogue from the original Star Wars trilogy. The data was gathered from Kaggle.com and was in tabular form where the dialogue is assigned to the character delivering the line. The data was not annotated in any way. 
 
-Preprocessing
+Processing
 
 The project was produced in Jupyter Notebooks and processed using Python. After loading the data into Jupyter as a pandas dataframe (a separate dataframe for each movie), the most talkative characters were determined and the top three were chosen for a more detailed analysis. The most talkative characters were determined according to the number of lines they have in the trilogy. For a more detailed analysis, one could have considered the length of their lines as well but for the exploratory nature of this project, I chose the more straightforward option. Here a judgement call was made and the top three characters were determined to be Luke, Han and C-3PO as Ben dies in Episode IV and Leia comes along so late that she is not in the top three in the first movie and as C-3PO is still in the top four in every movie.
 
