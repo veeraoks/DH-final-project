@@ -17,14 +17,12 @@ import re
 import en_core_web_md
 
 
-# In[ ]:
 
 
 nlp = en_core_web_md.load()
 lemmatizer = WordNetLemmatizer()
 
 
-# In[ ]:
 
 
 #load data
@@ -33,7 +31,7 @@ episodeV = pd.read_csv('star-wars-movie-scripts/SW_EpisodeV.txt', delim_whitespa
 episodeVI = pd.read_csv('star-wars-movie-scripts/SW_EpisodeVI.txt', delim_whitespace=True, names=["index", "character", "dialogue"], header = None)
 
 
-# In[ ]:
+
 
 
 #create copies so that the original doesn't need to altered
@@ -52,7 +50,7 @@ episodeVI_copy = episodeVI.copy()
 episodeVI_copy = episodeVI_copy.drop(0)
 
 
-# In[ ]:
+
 
 
 #let's see which character has the most lines and consider those as the most talkative
@@ -67,7 +65,7 @@ print(top_characters_VI[:4])
 #here we will make a judgement call and focus on Luke, Han and C-3PO cause Ben dies in Episode IV and Leia comes along so late
 
 
-# In[ ]:
+
 
 
 #let's create a new version of the dataframe containing just the three top characters
@@ -82,7 +80,7 @@ top_characters_V_df = episodeV_copy[(episodeV_copy['character'] == 'LUKE') | (ep
 top_characters_VI_df = episodeVI_copy[(episodeVI_copy['character'] == 'LUKE') | (episodeVI_copy['character'] == 'HAN') | (episodeVI_copy['character'] == 'THREEPIO')]
 
 
-# In[ ]:
+
 
 
 #let's combine the dataframes
@@ -90,14 +88,14 @@ top_characters_all_temp = top_characters_IV_df.append(top_characters_V_df)
 top_characters_all = top_characters_all_temp.append(top_characters_VI_df)
 
 
-# In[ ]:
+
 
 
 #putting the dialogue through a spacy nlp pipeline (for easier manual inspection etc.)
 top_characters_all['tokenized'] = top_characters_all['dialogue'].apply(lambda text: nlp(text))
 
 
-# In[ ]:
+
 
 
 #creating dataframes for each top character 
@@ -106,7 +104,7 @@ han = top_characters_all[(top_characters_all['character'] == 'HAN')]
 threepio = top_characters_all[(top_characters_all['character'] == 'THREEPIO')]
 
 
-# In[ ]:
+
 
 
 #cleaning the text from excessive punctuation and stopwords using regex
@@ -131,7 +129,7 @@ threepio_dialogue_no_punct = pattern.sub('', str(threepio_dialogue))
 threepio_dialogue_clean = ' '.join([word for word in threepio_dialogue_no_punct.split() if word not in stopwords.words("english")])
 
 
-# In[ ]:
+
 
 
 #tagging
@@ -140,7 +138,7 @@ han_tagged = nltk.pos_tag(word_tokenize(str(han_dialogue_clean)))
 threepio_tagged = nltk.pos_tag(word_tokenize(str(threepio_dialogue_clean)))
 
 
-# In[ ]:
+
 
 
 #let's transform the tags into correct ones
@@ -164,7 +162,7 @@ def senti_tags(text):
     return text_senti
 
 
-# In[ ]:
+
 
 
 #function to retrieve the first sense from wordnet
@@ -179,7 +177,7 @@ def synset_senses(text):
     return synsets
 
 
-# In[ ]:
+
 
 
 #function to calculate the sentiment scores
@@ -201,7 +199,7 @@ def sentiment_scores(text):
     return (len(positives)/len(synsets))*100, (len(negatives)/len(synsets))*100, (len(neutrals)/len(synsets))*100
 
 
-# In[ ]:
+
 
 
 #counting the scores and assigning them to variables
@@ -210,7 +208,7 @@ han_sentiment_score = sentiment_scores(han_tagged)
 threepio_sentiment_score = sentiment_scores(threepio_tagged)
 
 
-# In[ ]:
+
 
 
 #creating dataframes from the results to export and use for visualization
