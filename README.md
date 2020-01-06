@@ -24,4 +24,5 @@ Analysis and Biases
 After processing the data and examining the results, it is noticeable that SentiWordNet is not the best possible tool for sentiment analysis for speech. Mainly because the analysis was done for each word separately and thus context got ignored. This then leads for instance to the lost of sarcasm and irony that are extremely prevailing in speech. For this reason, the results mainly show a neutral tone with each character and a little difference among characters or within the trilogy can be detected. However, C-3PO does seem to express a slightly more negative tone then the two other and this could reflect the more expressive and scared nature of the character, but this conclusion would require further study with a more accurate analyzer. Furthermore, the accuracy of the tool used could have been tested. But as mentioned above, the purpose of this project was purely exploratory of the data and my skills with managing data computationally too.
 
 Acknowledgments
+
 Xavier. (2018). Star Wars Movie Scripts, Version 2. Retrieved November 2019 from https://www.kaggle.com/xvivancos/star-wars-movie-scripts/version/2.
