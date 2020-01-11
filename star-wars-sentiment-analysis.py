@@ -216,3 +216,35 @@ data_df = {'Name': ['Luke','Han', 'Threepio'],'Positive':[luke_sentiment_score[0
                        'Neutral': [luke_sentiment_score[2], han_sentiment_score[2], threepio_sentiment_score[2]]}
 scores_df = pd.DataFrame(data=data_df)
 
+
+#EXAMPLES
+
+
+#function to give the sense and sentiment score 
+# prints out the word and its positive, negative and neutral score respectively 
+def sentiments(text):
+    new_tags = senti_tags(text)
+    synsets = synset_senses(new_tags)
+    sentis_scores= []
+    for syn in synsets:
+        sentis_scores.append((syn, syn.pos_score(), syn.neg_score(), syn.obj_score()))
+    return sentis_scores   
+
+
+#a random example from Luke's dialogue
+sentiments(luke_tagged[1924:2024])
+
+#a random example from Han's dialogue
+sentiments(han_tagged[1000:1100])
+
+#a random example from Threepio's dialogue
+sentiments(threepio_tagged[500:600])
+
+#examples from Han's dialogue
+han_line = 'Yeah, great at getting us into trouble.'
+han_line_2 = 'Nice work. Great, Chewie! Great! Always thinking with your stomach.'
+han_line_3 = "Don't everyone thank me at once."
+
+print(sentiments(nltk.pos_tag(word_tokenize(han_line.lower()))))
+print(sentiments(nltk.pos_tag(word_tokenize(han_line_2.lower()))))
+print(sentiments(nltk.pos_tag(word_tokenize(han_line_3.lower()))))
